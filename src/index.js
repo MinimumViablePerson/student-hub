@@ -1,12 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import * as serviceWorker from './serviceWorker'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Sheltr from '@taito/react-sheltr'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import './index.css'
+import './styles/card.css'
+import './styles/list.css'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  <Sheltr duration={700}>
+    <Router>
+      <App />
+    </Router>
+  </Sheltr>,
+  document.getElementById('root')
+)
+
+serviceWorker.unregister()

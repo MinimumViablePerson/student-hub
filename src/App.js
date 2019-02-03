@@ -1,28 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
 
+import { Route, Switch } from 'react-router-dom'
+
+import Navbar from './components/Navbar'
+import HomePage from './components/HomePage'
+import StudentList from './components/StudentList'
+import StudentDetails from './components/StudentDetails'
+import ProjectList from './components/ProjectList'
+import ProjectDetails from './components/ProjectDetails'
+import './App.css'
 class App extends Component {
-  render() {
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className='app'>
+        <Navbar />
+        <div className='container'>
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/students' component={StudentList} />
+            <Route path='/students/:slug' component={StudentDetails} />
+            <Route exact path='/projects' component={ProjectList} />
+            <Route path='/projects/:slug' component={ProjectDetails} />
+            <Route component={() => <h1>Page not found</h1>} />
+          </Switch>
+        </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
