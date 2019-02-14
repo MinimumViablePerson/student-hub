@@ -24,7 +24,7 @@ class StudentDetails extends Component {
 
     if (student) {
       const { name, avatar, slug } = student
-      return <SharedElement sharedId={`student-${slug}`} startOnUnmount>
+      return <SharedElement sharedId={`student-${slug}`}>
         {
           props =>
             <div className='student-details' {...props}>

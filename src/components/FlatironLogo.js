@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default () =>
-  <svg width='136px' height='20px'>
+  <svg width='136px' height='22px'>
     <g id='Page-1' stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
       <g id='Navigation---Mobile-3.2' transform='translate(-20.000000, -14.000000)'>
         <g id='menu-header'>

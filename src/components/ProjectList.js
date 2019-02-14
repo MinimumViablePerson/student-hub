@@ -14,15 +14,28 @@ class ProjectList extends Component {
     this.setState({ projects })
   }
 
+  get matchedProjects () {
+    const { projects } = this.state
+    const { searchTerm } = this.props
+    return projects.filter(project =>
+      project.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }
+
   componentDidMount () {
     this.getProjects()
   }
 
   render () {
-    const { projects } = this.state
+    const { matchedProjects } = this
+
+    if (matchedProjects.length === 0) {
+      return <h3>No projects matched your current search.</h3>
+    }
+
     return <div className='list project-list'>
       {
-        projects.map(project =>
+        matchedProjects.map(project =>
           <ProjectCard key={project.slug} project={project} />
         )
       }

@@ -10,16 +10,26 @@ import ProjectList from './components/ProjectList'
 import ProjectDetails from './components/ProjectDetails'
 import './App.css'
 class App extends Component {
+  state = {
+    searchTerm: ''
+  }
+
+  updateSearchTerm = searchTerm => {
+    this.setState({ searchTerm })
+  }
+
   render () {
+    const { updateSearchTerm } = this
+    const { searchTerm } = this.state
     return (
       <div className='app'>
-        <Navbar />
+        <Navbar updateSearchTerm={updateSearchTerm} />
         <div className='container'>
           <Switch>
             <Route exact path='/' component={HomePage} />
-            <Route exact path='/students' component={StudentList} />
+            <Route exact path='/students' render={props => <StudentList {...props} searchTerm={searchTerm} />} />
             <Route path='/students/:slug' component={StudentDetails} />
-            <Route exact path='/projects' component={ProjectList} />
+            <Route exact path='/projects' render={props => <ProjectList {...props} searchTerm={searchTerm} />} />
             <Route path='/projects/:slug' component={ProjectDetails} />
             <Route component={() => <h1>Page not found</h1>} />
           </Switch>

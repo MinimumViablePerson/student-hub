@@ -1,14 +1,11 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-import SearchBar from './SearchBar'
 import StudentCard from './StudentCard'
-
 import API from '../adapters/API'
 
-class StudentList extends Component {
+class StudentList extends PureComponent {
   state = {
-    students: [],
-    searchTerm: ''
+    students: []
   }
 
   async getStudents () {
@@ -17,14 +14,11 @@ class StudentList extends Component {
   }
 
   get matchedStudents () {
-    const { students, searchTerm } = this.state
+    const { students } = this.state
+    const { searchTerm } = this.props
     return students.filter(student =>
       student.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
-  }
-
-  updateSearchTerm = searchTerm => {
-    this.setState({ searchTerm })
   }
 
   componentDidMount () {
@@ -32,9 +26,13 @@ class StudentList extends Component {
   }
 
   render () {
-    const { updateSearchTerm, matchedStudents } = this
+    const { matchedStudents } = this
+
+    if (matchedStudents.length === 0) {
+      return <h3>No students matched your current search.</h3>
+    }
+
     return <div className='list student-list'>
-      <SearchBar handleChange={updateSearchTerm} />
       {
         matchedStudents.map(student =>
           <StudentCard key={student.slug} student={student} />
